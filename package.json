@@ -1,46 +1,57 @@
 {
-  "name": "vuetify-components",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "core-js": "^2.6.5",
-    "vue": "^2.6.10"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
+    "name": "@qualitech/qc-vuetify",
+    "description": "Modulo com componentes genéricos para auxiliar/facilitar no desenvolvimento de front-end",
+    "version": "0.1.0",
+    "author": {
+        "name": "Henrique L S Silva"
     },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+    "bugs": {
+        "url": "https://github.com/lsshenrique/qc-vuetify/issues"
+    },
+    "homepage": "https://github.com/lsshenrique/qc-vuetify#readme",
+    "keywords": [
+        "vuetify"
     ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
+    "license": "Apache-2.0",
+    "main": "src/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lsshenrique/qc-vuetify.git"
+    },
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "build-bundle": "vue-cli-service build --target lib --name qc-vuetify ./src/index.js",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "core-js": "^2.6.5",
+        "vee-validate": "^2.2.10",
+        "vue": "^2.6.10",
+        "vuetify": "^1.5.14"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^3.11.0",
+        "@vue/cli-plugin-eslint": "^3.11.0",
+        "@vue/cli-service": "^3.11.0",
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.16.0",
+        "eslint-plugin-vue": "^5.0.0",
+        "vue-template-compiler": "^2.6.10"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "rules": {},
+        "parserOptions": {
+            "parser": "babel-eslint"
+        }
     }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
 }
