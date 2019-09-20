@@ -8,7 +8,7 @@
             slot-scope="{ errors, valid }"
             v-model="innerValue"
             :error-messages="errors"
-            :success="valid"
+            :success="showSuccess && valid"
             :hide-details="$attrs['hide-details'] || valid !== false"
             v-bind="$attrs"
             v-on="$listeners"
@@ -20,7 +20,7 @@
 import { ValidationProvider } from "vee-validate"
 
 export default {
-    name: 'ValidTextField',
+    name: "ValidTextField",
     components: {
         ValidationProvider
     },
@@ -37,6 +37,10 @@ export default {
         name: {
             type: String,
             default: ""
+        },
+        showSuccess: {
+            type: Boolean,
+            default: false
         }
     },
     data: () => ({

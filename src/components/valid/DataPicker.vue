@@ -3,7 +3,7 @@
         :name="$attrs.label || $attrs.name"
         :rules="rules"
     >
-        <base-autocomplete
+        <BaseDataPicker
             slot-scope="{ errors, valid }"
             v-model="innerValue"
             :error-messages="errors"
@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import BaseAutocomplete from "./../base/Autocomplete"
+import BaseDataPicker from "./../base/DataPicker"
 import { ValidationProvider } from "vee-validate"
 
 export default {
     components: {
         ValidationProvider,
-        BaseAutocomplete
+        BaseDataPicker
     },
     props: {
         rules: {

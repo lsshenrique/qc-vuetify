@@ -4,25 +4,27 @@
         :rules="rules"
         :vid="$vnode.data.ref"
     >
-        <core-file-field
+        <BaseFileField
             slot-scope="{ errors, valid }"
             v-model="innerValue"
             v-bind="$attrs"
             :hide-details="$attrs['hide-details'] || valid !== false"
             :error-messages="errors"
-            :success="valid"
+            :success="showSuccess && valid"
             v-on="$listeners"
         />
     </ValidationProvider>
 </template>
 
 <script>
+import BaseFileField from "./../base/FileField"
 import { ValidationProvider } from "vee-validate"
 
 export default {
     name: "ValidTextField",
     components: {
-        ValidationProvider
+        ValidationProvider,
+        BaseFileField
     },
     props: {
         rules: {
@@ -36,6 +38,10 @@ export default {
         // eslint-disable-next-line
         value: {
             default: null
+        },
+        showSuccess: {
+            type: Boolean,
+            default: false
         }
     },
     data: () => ({

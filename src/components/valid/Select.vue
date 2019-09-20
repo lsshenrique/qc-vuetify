@@ -7,7 +7,7 @@
             slot-scope="{ errors, valid }"
             v-model="innerValue"
             :error-messages="errors"
-            :success="valid"
+            :success="showSuccess && valid"
             :hide-details="$attrs['hide-details'] || valid !== false"
             v-bind="$attrs"
             v-on="$listeners"
@@ -30,6 +30,10 @@ export default {
         value: {
             type: null,
             default: null
+        },
+        showSuccess: {
+            type: Boolean,
+            default: false
         }
     },
     data: () => ({
