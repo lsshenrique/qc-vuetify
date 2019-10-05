@@ -1,9 +1,10 @@
 <template>
     <ValidationProvider
-        :name="$attrs.label || $attrs.name"
+        :name="$attrs.label || name"
         :rules="rules"
+        :vid="$vnode.data.ref"
     >
-        <BaseDataPicker
+        <v-textarea
             slot-scope="{ errors, valid }"
             v-model="innerValue"
             :error-messages="errors"
@@ -16,23 +17,26 @@
 </template>
 
 <script>
-import BaseDataPicker from "./../base/DataPicker"
 import { ValidationProvider } from "vee-validate"
 
 export default {
-    name: "ValidDataPicker",
+    name: "ValidTextarea",
     components: {
-        ValidationProvider,
-        BaseDataPicker
+        ValidationProvider
     },
     props: {
         rules: {
             type: [Object, String],
             default: ""
         },
+        // must be included in props
         value: {
             type: null,
             default: null
+        },
+        name: {
+            type: String,
+            default: ""
         },
         showSuccess: {
             type: Boolean,
@@ -48,11 +52,13 @@ export default {
             this.$emit("input", newVal)
         },
         // Handles external model changes.
-        value: {
-            immediate: true,
-            handler(newVal) {
-                this.innerValue = newVal
-            }
+        value(newVal) {
+            this.innerValue = newVal
+        }
+    },
+    created() {
+        if (this.value) {
+            this.innerValue = this.value
         }
     }
 }

@@ -7,6 +7,7 @@
         <v-text-field
             slot-scope="{ errors, valid }"
             v-model="innerValue"
+            :class="$vnode.data.staticClass"
             :error-messages="errors"
             :success="showSuccess && valid"
             :hide-details="$attrs['hide-details'] || valid !== false"

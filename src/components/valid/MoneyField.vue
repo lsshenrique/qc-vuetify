@@ -1,38 +1,44 @@
 <template>
     <ValidationProvider
-        :name="$attrs.label || $attrs.name"
+        :name="$attrs.label || name"
         :rules="rules"
+        :vid="$vnode.data.ref"
     >
-        <BaseDataPicker
+        <BaseMoneyField
             slot-scope="{ errors, valid }"
-            v-model="innerValue"
+            v-model.lazy="innerValue"
+            v-bind="$attrs"
+            class="text-xs-right"
             :error-messages="errors"
             :success="showSuccess && valid"
             :hide-details="$attrs['hide-details'] || valid !== false"
-            v-bind="$attrs"
-            v-on="$listeners"
         />
     </ValidationProvider>
 </template>
 
 <script>
-import BaseDataPicker from "./../base/DataPicker"
+import BaseMoneyField from "./../base/BaseMoneyField"
 import { ValidationProvider } from "vee-validate"
 
 export default {
-    name: "ValidDataPicker",
+    name: "ValidMoneyField",
     components: {
         ValidationProvider,
-        BaseDataPicker
+        BaseMoneyField
     },
     props: {
         rules: {
             type: [Object, String],
             default: ""
         },
+        // must be included in props
         value: {
-            type: null,
-            default: null
+            type: [String, Number],
+            default: 0
+        },
+        name: {
+            type: String,
+            default: ""
         },
         showSuccess: {
             type: Boolean,
@@ -40,11 +46,11 @@ export default {
         }
     },
     data: () => ({
-        innerValue: ""
+        innerValue: "0,00"
     }),
     watch: {
         // Handles internal model changes.
-        innerValue(newVal) {
+        innerValue(newVal, oldVal) {
             this.$emit("input", newVal)
         },
         // Handles external model changes.

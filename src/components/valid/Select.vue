@@ -9,6 +9,23 @@
             :error-messages="errors"
             :success="showSuccess && valid"
             :hide-details="$attrs['hide-details'] || valid !== false"
+            :attach="attach"
+            :browserAutocomplete="browserAutocomplete"
+            :chips="chips"
+            :clearable="clearable"
+            :deletableChips="deletableChips"
+            :dense="dense"
+            :hideSelected="hideSelected"
+            :items="items"
+            :itemAvatar="itemAvatar"
+            :itemDisabled="itemDisabled"
+            :itemText="itemText"
+            :itemValue="itemValue"
+            :multiple="multiple"
+            :openOnClear="openOnClear"
+            :returnObject="returnObject"
+            :searchInput="searchInput"
+            :smallChips="smallChips"
             v-bind="$attrs"
             v-on="$listeners"
         />
@@ -34,7 +51,47 @@ export default {
         showSuccess: {
             type: Boolean,
             default: false
-        }
+        },
+        attach: {
+            type: null,
+            default: false
+        },
+        browserAutocomplete: {
+            type: String,
+            default: "on"
+        },
+        chips: Boolean,
+        clearable: Boolean,
+        deletableChips: Boolean,
+        dense: Boolean,
+        hideSelected: Boolean,
+        items: {
+            type: Array,
+            default: () => []
+        },
+        itemAvatar: {
+            type: [String, Array, Function],
+            default: "avatar"
+        },
+        itemDisabled: {
+            type: [String, Array, Function],
+            default: "disabled"
+        },
+        itemText: {
+            type: [String, Array, Function],
+            default: "text"
+        },
+        itemValue: {
+            type: [String, Array, Function],
+            default: "value"
+        },
+        multiple: Boolean,
+        openOnClear: Boolean,
+        returnObject: Boolean,
+        searchInput: {
+            default: null
+        },
+        smallChips: Boolean
     },
     data: () => ({
         innerValue: ""

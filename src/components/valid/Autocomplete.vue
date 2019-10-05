@@ -8,9 +8,10 @@
             v-model="innerValue"
             :error-messages="errors"
             :success="showSuccess && valid"
+            :items="items"
             :hide-details="$attrs['hide-details'] || valid !== false"
-            v-bind="$attrs"
             v-on="$listeners"
+            v-bind="$attrs"
         />
     </ValidationProvider>
 </template>
@@ -36,7 +37,8 @@ export default {
         showSuccess: {
             type: Boolean,
             default: false
-        }
+        },
+        items: Array
     },
     data: () => ({
         innerValue: ""

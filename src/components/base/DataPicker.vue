@@ -7,6 +7,7 @@
         offset-y
         full-width
         min-width="290px"
+        :disabled="disabled || readonly"
     >
         <template v-slot:activator="{ on }">
             <v-text-field
@@ -18,6 +19,7 @@
                 v-on="on"
                 @blur="innerValue = parseDate($event.target.value)"
                 :disabled="disabled"
+                :readonly="readonly"
             ></v-text-field>
         </template>
         <v-date-picker
@@ -29,6 +31,7 @@
             @change="menu = false"
             :type="type"
             :disabled="disabled"
+            :readonly="readonly"
         >
         </v-date-picker>
     </v-menu>
@@ -38,6 +41,7 @@
 import moment, { isMoment } from "moment"
 
 export default {
+    name: "BaseDataPicker",
     props: {
         label: String,
         value: String,
@@ -47,6 +51,7 @@ export default {
             default: "date"
         },
         disabled: Boolean,
+        readonly: Boolean,
         rules: {
             type: [Object, String],
             default: ""
@@ -83,10 +88,13 @@ export default {
             this.$emit("input", newVal)
         },
         // Handles external model changes.
-        value(newVal) {
-            let formato = ["DD/MM/YYYY", "YYYY-MM-DD", "MM/YYYY", "YYYY-MM"]
-            let data = moment(newVal, formato)
-            this.innerValue = data.isValid() ? data.toISOString() : ""
+        value: {
+            immediate: true,
+            handler(newVal) {
+                let formato = ["DD/MM/YYYY", "YYYY-MM-DD", "MM/YYYY", "YYYY-MM"]
+                let data = moment(newVal, formato)
+                this.innerValue = data.isValid() ? data.toISOString() : ""
+            }
         }
     }
 }
