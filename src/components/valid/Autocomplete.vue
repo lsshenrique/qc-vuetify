@@ -49,13 +49,11 @@ export default {
             this.$emit("input", newVal)
         },
         // Handles external model changes.
-        value(newVal) {
-            this.innerValue = newVal
-        }
-    },
-    created() {
-        if (this.value) {
-            this.innerValue = this.value
+        value: {
+            deep: true,
+            handler(newVal) {
+                this.innerValue = newVal
+            }
         }
     }
 }
