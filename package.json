@@ -1,7 +1,7 @@
 {
     "name": "@qualitech/qc-vuetify",
     "description": "Modulo com componentes genéricos para auxiliar/facilitar no desenvolvimento de front-end",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "author": {
         "name": "Henrique L S Silva"
     },
