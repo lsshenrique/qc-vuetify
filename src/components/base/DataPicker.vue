@@ -20,6 +20,7 @@
                 @blur="innerValue = parseDate($event.target.value)"
                 :disabled="disabled"
                 :readonly="readonly"
+                :mask="typeIsMonth ? '##/####' : '##/##/####'"
             ></v-text-field>
         </template>
         <v-date-picker

@@ -3,6 +3,7 @@ import DataPicker from './base/DataPicker.vue'
 import FileField from './base/FileField.vue'
 import MoneyField from './base/BaseMoneyField.vue'
 import Btn from './base/Btn.vue'
+import Icon from './base/Icon.vue'
 import ValidAutocomplete from './valid/Autocomplete.vue'
 import ValidCombobox from './valid/Combobox.vue'
 import ValidSelect from './valid/Select.vue'
@@ -18,6 +19,7 @@ const Components = {
     FileField,
     MoneyField,
     Btn,
+    Icon,
     ValidAutocomplete,
     ValidCombobox,
     ValidSelect,
