@@ -12,6 +12,8 @@
             :error-messages="errors"
             :success="showSuccess && valid"
             :hide-details="$attrs['hide-details'] || valid !== false"
+            @focus="$emit('focus', $event)"
+            @blur="$emit('blur', $event)"
         />
     </ValidationProvider>
 </template>
@@ -50,7 +52,7 @@ export default {
     }),
     watch: {
         // Handles internal model changes.
-        innerValue(newVal, oldVal) {
+        innerValue(newVal) {
             this.$emit("input", newVal)
         },
         // Handles external model changes.

@@ -4,6 +4,8 @@
         v-money="money"
         v-bind="$attrs"
         class="text-xs-right"
+        @focus="$emit('focus', $event)"
+        @blur="$emit('blur', $event)"
     />
 </template>
 
@@ -27,8 +29,8 @@ export default {
     }),
     watch: {
         // Handles internal model changes.
-        innerValue: _.debounce(function(newVal, oldVal) {
-            let aux = this.numberToString(newVal)
+        innerValue: _.debounce(function(newVal) {
+            let aux = this.stringToNumber(newVal)
 
             if (aux !== this.value) {
                 this.$emit("input", aux)
@@ -38,14 +40,13 @@ export default {
         value: {
             immediate: true,
             handler(newVal) {
-                if(this.$attrs["label"] === "Valor Fixo")debugger
-
+                // debugger
                 this.innerValue = this.numberToString(newVal)
             }
         }
     },
     methods: {
-        numberToString(value) {
+        stringToNumber(value) {
             if (typeof value === "string") {
                 let valor = value.replace(/\./g, "").replace(",", ".")
                 valor = parseFloat(valor)
@@ -54,7 +55,7 @@ export default {
                 return value
             }
         },
-        stringToNumber() {
+        numberToString(value) {
             if (typeof value === "number") {
                 let valor = parseFloat(value)
 

@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import moment, { isMoment } from "moment"
+import moment from "moment"
 
 export default {
     name: "BaseDataPicker",
