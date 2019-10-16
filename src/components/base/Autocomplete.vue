@@ -21,7 +21,7 @@
                     @click.stop="selecionarTodos"
                 >
                     <v-list-tile-action>
-                        <v-icon>select_all</v-icon>
+                        <v-icon>{{selectAllIcon}}</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
                         <v-list-tile-title>{{ selectAllText }}</v-list-tile-title>
@@ -67,6 +67,10 @@ export default {
         selectAllText: {
             type: String,
             default: "Selecionar todos"
+        },
+        selectAllIcon: {
+            type: String,
+            default: "select_all"
         }
     },
     data: () => ({

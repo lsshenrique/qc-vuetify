@@ -6,6 +6,7 @@
         :left="tooltipPosition === 'left'"
         :content-class="tooltipPosition"
         :disabled="disabled"
+        :max-width="maxWidth"
     >
         <template v-slot:activator="{ on }">
             <v-badge
@@ -58,7 +59,8 @@ export default {
             type: String,
             default: 'bottom'
         },
-        disabled: Boolean
+        disabled: Boolean,
+        maxWidth: null
     }
 }
 </script>

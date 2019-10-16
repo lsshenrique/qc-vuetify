@@ -14,7 +14,26 @@
             :hide-details="$attrs['hide-details'] || valid !== false"
             @focus="$emit('focus', $event)"
             @blur="$emit('blur', $event)"
-        />
+        >
+            <!-- Pass on all named slots -->
+            <slot
+                v-for="slot in Object.keys($slots)"
+                :name="slot"
+                :slot="slot"
+            />
+
+            <!-- Pass on all scoped slots -->
+            <!-- <template
+                v-for="slot in Object.keys($scopedSlots)"
+                :slot="slot"
+                slot-scope="scope"
+            >
+                <slot
+                    :name="slot"
+                    v-bind="scope"
+                />
+            </template> -->
+        </BaseMoneyField>
     </ValidationProvider>
 </template>
 
