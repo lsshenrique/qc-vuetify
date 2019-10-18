@@ -1,11 +1,9 @@
 <template>
     <v-text-field
-        v-model.lazy="innerValue"
-        v-money="money"
+        v-model="innerValue"
         v-bind="$attrs"
         class="text-xs-right"
-        @focus="$emit('focus', $event)"
-        @blur="$emit('blur', $event)"
+        @input.native="input"
     >
         <!-- Pass on all named slots -->
         <slot
@@ -29,62 +27,73 @@
 </template>
 
 <script>
-import { VMoney } from "v-money"
 import _ from "lodash"
+import { format, unformat, setCursor, defaults } from "../../util/moneyMask.js"
 
 export default {
-    name: "BaseMoneyField",
+    name: "BaseMoneyField2",
     props: {
         // must be included in props
         value: {
             type: [String, Number],
             default: 0
+        },
+        masked: {
+            type: Boolean,
+            default: false
+        },
+        precision: {
+            type: Number,
+            default: () => defaults.precision
+        },
+        decimal: {
+            type: String,
+            default: () => defaults.decimal
+        },
+        thousands: {
+            type: String,
+            default: () => defaults.thousands
         }
     },
-    directives: { money: VMoney },
     data: () => ({
-        innerValue: "0,00",
-        money: { decimal: ",", thousands: "." }
+        innerValue: null
     }),
     watch: {
-        // Handles internal model changes.
-        innerValue: _.debounce(function(newVal) {
-            let aux = this.stringToNumber(newVal)
-
-            if (aux !== this.value) {
-                this.$emit("input", aux)
-            }
-        }, 200),
-        // Handles external model changes.
         value: {
             immediate: true,
-            handler(newVal) {
-                // debugger
-                this.innerValue = this.numberToString(newVal)
+            handler(newValue) {
+                let formatted = format(newValue, this.$props)
+
+                if (formatted !== this.innerValue) {
+                    this.innerValue = formatted
+                }
             }
         }
     },
     methods: {
-        stringToNumber(value) {
-            if (typeof value === "string") {
-                let valor = value.replace(/\./g, "").replace(",", ".")
-                valor = parseFloat(valor)
-                return isNaN(valor) ? 0 : valor
-            } else {
-                return value
-            }
+        input(evt) {
+            let opt = this.$props
+            let el = this.getInput(evt.target)
+
+            var positionFromEnd = el.value.length - el.selectionEnd
+            el.value = format(el.value, opt)
+
+            positionFromEnd = Math.max(el.value.length - positionFromEnd, 1)
+            setCursor(el, positionFromEnd)
+
+            this.emitInputLazy(el.value)
         },
-        numberToString(value) {
-            if (typeof value === "number") {
-                let valor = parseFloat(value)
+        getInput(el) {
+            if (!el) el = this.$el
+            if (!el) return
 
-                if (isNaN(valor)) valor = 0
-
-                return valor.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-            } else {
-                return value
-            }
-        }
+            return el.tagName.toLocaleUpperCase() !== "INPUT" ? el.getElementsByTagName("input")[0] : el
+        },
+        emitInputLazy: _.debounce(function(value) {
+            this.innerValue = value
+            // this.$emit("input", value)
+            this.$emit("input", this.masked ? value : unformat(value, this.precision))
+        }, 200)
     }
 }
 </script>
