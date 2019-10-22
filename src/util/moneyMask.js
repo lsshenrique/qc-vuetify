@@ -4,7 +4,7 @@ function format(input, opt = defaults) {
     if (typeof input === 'number') {
         input = input.toFixed(fixed(opt.precision))
     }
-    var negative = input.indexOf('-') >= 0 ? '-' : ''
+    var negative = input && input.indexOf('-') >= 0 ? '-' : ''
 
     var numbers = onlyNumbers(input)
     var currency = numbersToCurrency(numbers, opt.precision)
@@ -16,7 +16,7 @@ function format(input, opt = defaults) {
 }
 
 function unformat(input, precision) {
-    var negative = input.indexOf('-') >= 0 ? -1 : 1
+    var negative = input && input.indexOf('-') >= 0 ? -1 : 1
     var numbers = onlyNumbers(input)
     var currency = numbersToCurrency(numbers, precision)
     return parseFloat(currency) * negative

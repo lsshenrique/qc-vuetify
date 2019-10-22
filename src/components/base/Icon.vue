@@ -32,6 +32,7 @@
                 v-else
                 v-on="on"
                 :color="color"
+                :class="$vnode.data.staticClass"
             >{{icon}}</v-icon>
         </template>
         <span>{{ tooltip }}</span>
