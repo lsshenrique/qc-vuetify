@@ -2,6 +2,7 @@
     <ValidationProvider
         :name="$attrs.label || $attrs.name"
         :rules="rules"
+        :debounce="500"
     >
         <BaseDataPicker
             slot-scope="{ errors, valid }"
