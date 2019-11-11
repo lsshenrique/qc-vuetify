@@ -14,13 +14,14 @@
                 v-bind="$attrs"
                 :value="dataComputada"
                 :label="label"
-                prepend-inner-icon="event"
+                :prepend-inner-icon="prependInnerIcon"
                 :hide-details="hideDetails"
                 v-on="on"
                 @blur="innerValue = parseDate($event.target.value)"
                 :disabled="disabled"
                 :readonly="readonly"
                 :mask="typeIsMonth ? '##/####' : '##/##/####'"
+                :class="$vnode.data.staticClass"
             ></v-text-field>
         </template>
         <v-date-picker
@@ -56,6 +57,10 @@ export default {
         rules: {
             type: [Object, String],
             default: ""
+        },
+        prependInnerIcon: {
+            type: String,
+            default: "event"
         }
     },
     data: () => ({
