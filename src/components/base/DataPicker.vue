@@ -34,6 +34,7 @@
             :type="type"
             :disabled="disabled"
             :readonly="readonly"
+            :max="max"
         >
         </v-date-picker>
     </v-menu>
@@ -61,7 +62,8 @@ export default {
         prependInnerIcon: {
             type: String,
             default: "event"
-        }
+        },
+        max: String
     },
     data: () => ({
         menu: false,
