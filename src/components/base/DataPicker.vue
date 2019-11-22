@@ -30,8 +30,7 @@
             scrollable
             locale="pt-BR"
             :date-format="typeIsMonth ? 'mm/yyyy' : 'dd/mm/yyyy'"
-            @input="menu = false"
-            @change="change"
+            @change="onChange"
             :type="type"
             :disabled="disabled"
             :readonly="readonly"
@@ -64,8 +63,7 @@ export default {
             type: String,
             default: "event"
         },
-        max: String,
-        change: Function
+        max: String
     },
     data: () => ({
         menu: false,
@@ -87,6 +85,10 @@ export default {
             if (!date) return null
             let dateAux = moment(date, this.format)
             return dateAux.isValid() ? dateAux.toISOString() : ""
+        },
+        onChange(){
+            this.menu = false
+            this.$emit("change")
         }
     },
     watch: {
