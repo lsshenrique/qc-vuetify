@@ -30,7 +30,8 @@
             scrollable
             locale="pt-BR"
             :date-format="typeIsMonth ? 'mm/yyyy' : 'dd/mm/yyyy'"
-            @change="menu = false"
+            @input="menu = false"
+            @change="change"
             :type="type"
             :disabled="disabled"
             :readonly="readonly"
@@ -63,7 +64,8 @@ export default {
             type: String,
             default: "event"
         },
-        max: String
+        max: String,
+        change: Function
     },
     data: () => ({
         menu: false,
