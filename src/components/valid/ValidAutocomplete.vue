@@ -4,12 +4,12 @@
         :rules="rules"
     >
         <base-autocomplete
-            slot-scope="{ errors, valid }"
+            slot-scope="data"
             v-model="innerValue"
-            :error-messages="errors"
-            :success="showSuccess && valid"
+            :error-messages="data.errors"
+            :success="showSuccess && data.valid"
             :items="items"
-            :hide-details="$attrs['hide-details'] || valid !== false"
+            :hide-details="$attrs['hide-details'] || data.valid !== false"
             v-on="$listeners"
             v-bind="$attrs"
         />
@@ -21,6 +21,7 @@ import BaseAutocomplete from "./../base/Autocomplete"
 import { ValidationProvider } from "vee-validate"
 
 export default {
+    name: "ValidAutocomplete",
     components: {
         ValidationProvider,
         BaseAutocomplete

@@ -1,5 +1,6 @@
 <template>
     <v-autocomplete
+        ref="autocomplete"
         v-model="innerValue"
         v-bind="$attrs"
         v-on="$listeners"
@@ -13,6 +14,12 @@
         @blur="onBlur"
         @click="onFocus"
         @keyup.esc="onKeyEsc"
+        @keydown="onKeyDown"
+        @mousedown="onMouseDown"
+        @input="onInput"
+        @update:searchInput="onUpdate"
+        :attach="attach"
+        :readonly="readonly"
     >
         <template v-slot:prepend-item>
             <template v-if="search && selectAll">
@@ -71,7 +78,11 @@ export default {
         selectAllIcon: {
             type: String,
             default: "select_all"
-        }
+        },
+        readonly: {
+            default: false
+        },
+        attach: null
     },
     data: () => ({
         innerValue: "",
@@ -82,6 +93,12 @@ export default {
         menuProps() {
             if (!this.multiple) return {}
             return this.hasFocus || this.search ? { value: true } : { value: false }
+        },
+        isAttached() {
+            return this.attach === true || this.attach === ""
+        },
+        isReadonly() {
+            return this.readonly === true || this.readonly === ""
         }
     },
     watch: {
@@ -109,15 +126,81 @@ export default {
             this.search = null
             this.hasFocus = false
         },
-        onFocus() {
+        onFocus(e) {
             this.hasFocus = true
+            this.openMenuCondicional(e)
         },
-        onBlur() {
+        onBlur(e) {
             this.hasFocus = false
+            this.closeMenuCondicional(e)
         },
-        onKeyEsc() {
+        onKeyEsc(e) {
             this.search = null
             this.hasFocus = false
+            this.closeMenuCondicional(e)
+        },
+        onKeyDown(e) {
+            this.$emit("keydown", e)
+            this.openMenuCondicional(e)
+        },
+        onMouseDown(e) {
+            this.$emit("mousedown", e)
+            this.openMenuCondicional(e)
+        },
+        onInput(e) {
+            this.$emit("input", e)
+            this.openMenuCondicional(e)
+        },
+        onUpdate(e) {
+            this.$emit("update", e)
+            this.openMenuCondicional(e)
+        },
+        openMenuCondicional(e) {
+            if (!this.isAttached || !e) return
+
+            if (this.isReadonly) {
+                this.forceCloseMenu()
+            }
+
+            // console.log('openMenuCondicional', e);
+
+            // let autocomplete = this.$refs.autocomplete
+
+            // autocomplete.isMenuActive = true
+            // autocomplete.$_menuProps.value = true
+            // autocomplete.$refs.menu.isActive = true
+
+            // if (!autocomplete.isFocused) {
+            //     autocomplete.isFocused = true
+            //     autocomplete.$emit("focus")
+            //     autocomplete.$refs.input.focus()
+            // }
+        },
+        closeMenuCondicional(e) {
+            if (!this.isAttached) return
+
+            // console.log('closeMenuCondicional', e);
+            // let autocomplete = this.$refs.autocomplete
+
+            // if (e && e.path[0]) {
+            //     let firstEl = e.path[0]
+
+            //     if (firstEl.tagName !== "INPUT" || e.type !== "blur") {
+            //         if (autocomplete.content.contains(firstEl) || autocomplete.$el.contains(firstEl)) {
+            //             this.openMenuCondicional(e)
+            //             return
+            //         }
+            //     }
+            // }
+
+            this.forceCloseMenu()
+        },
+        forceCloseMenu() {
+            let autocomplete = this.$refs.autocomplete
+            autocomplete.isMenuActive = false
+            autocomplete.isFocused = false
+            autocomplete.$refs.input && autocomplete.$refs.input.blur()
+            autocomplete.selectedIndex = -1
         }
     },
     created() {
