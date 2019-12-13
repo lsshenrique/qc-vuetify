@@ -19,7 +19,7 @@
                 v-on="on"
                 @blur="innerValue = parseDate($event.target.value)"
                 :disabled="disabled"
-                :readonly="readonly"
+                :readonly="block"
                 :mask="typeIsMonth ? '##/####' : '##/##/####'"
                 :class="$vnode.data.staticClass"
             ></v-text-field>
@@ -63,7 +63,8 @@ export default {
             type: String,
             default: "event"
         },
-        max: String
+        max: String,
+        block: Boolean
     },
     data: () => ({
         menu: false,
