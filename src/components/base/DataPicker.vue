@@ -19,7 +19,7 @@
                 v-on="on"
                 @blur="innerValue = parseDate($event.target.value)"
                 :disabled="disabled"
-                :readonly="block"
+                :readonly="readonly || block"
                 :mask="typeIsMonth ? '##/####' : '##/##/####'"
                 :class="$vnode.data.staticClass"
             ></v-text-field>
