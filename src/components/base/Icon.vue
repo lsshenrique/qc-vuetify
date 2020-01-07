@@ -25,6 +25,7 @@
                 <v-icon
                     v-on="on"
                     :color="color"
+                    :small="small"
                 >{{icon}}</v-icon>
             </v-badge>
 
@@ -32,6 +33,7 @@
                 v-else
                 v-on="on"
                 :color="color"
+                :small="small"
                 :class="$vnode.data.staticClass"
             >{{icon}}</v-icon>
         </template>
@@ -61,7 +63,8 @@ export default {
             default: 'bottom'
         },
         disabled: Boolean,
-        maxWidth: null
+        maxWidth: null,
+        small: Boolean
     }
 }
 </script>
