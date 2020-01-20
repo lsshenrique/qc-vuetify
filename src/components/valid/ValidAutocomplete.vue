@@ -10,6 +10,7 @@
             :success="showSuccess && data.valid"
             :items="items"
             :hide-details="$attrs['hide-details'] || data.valid !== false"
+            :attach="attach"
             v-on="$listeners"
             v-bind="$attrs"
         />
@@ -39,7 +40,8 @@ export default {
             type: Boolean,
             default: false
         },
-        items: Array
+        items: Array,
+        attach: null
     },
     data: () => ({
         innerValue: ""

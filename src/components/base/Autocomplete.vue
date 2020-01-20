@@ -11,15 +11,15 @@
         :item-text="itemText"
         :item-value="itemValue"
         :menu-props="menuProps"
-        @blur="onBlur"
-        @click="onFocus"
-        @keyup.esc="onKeyEsc"
-        @keydown="onKeyDown"
-        @mousedown="onMouseDown"
-        @input="onInput"
-        @update:searchInput="onUpdate"
         :attach="attach"
         :readonly="readonly"
+        @click="onFocus"
+        @blur="onBlur"
+        @mousedown="onMouseDown"
+        @keyup.esc="onKeyEsc"
+        @keydown="onKeyDown"
+        @input="onInput"
+        @update:searchInput="onUpdate"
     >
         <template v-slot:prepend-item>
             <template v-if="search && selectAll">
@@ -27,8 +27,8 @@
                     ripple
                     @click.stop="selecionarTodos"
                 >
+                    <v-icon>{{selectAllIcon}}</v-icon>
                     <v-list-tile-action>
-                        <v-icon>{{selectAllIcon}}</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
                         <v-list-tile-title>{{ selectAllText }}</v-list-tile-title>
@@ -145,7 +145,6 @@ export default {
         },
         onMouseDown(e) {
             this.$emit("mousedown", e)
-            this.openMenuCondicional(e)
         },
         onInput(e) {
             this.$emit("input", e)
@@ -153,33 +152,30 @@ export default {
         },
         onUpdate(e) {
             this.$emit("update", e)
-            this.openMenuCondicional(e)
         },
         openMenuCondicional(e) {
             if (!this.isAttached || !e) return
 
             if (this.isReadonly) {
                 this.forceCloseMenu()
+                return
             }
 
-            // console.log('openMenuCondicional', e);
+            let autocomplete = this.$refs.autocomplete
 
-            // let autocomplete = this.$refs.autocomplete
+            autocomplete.isMenuActive = true
+            autocomplete.$_menuProps.value = true
+            autocomplete.$refs.menu.isActive = true
 
-            // autocomplete.isMenuActive = true
-            // autocomplete.$_menuProps.value = true
-            // autocomplete.$refs.menu.isActive = true
-
-            // if (!autocomplete.isFocused) {
-            //     autocomplete.isFocused = true
-            //     autocomplete.$emit("focus")
-            //     autocomplete.$refs.input.focus()
-            // }
+            if (!autocomplete.isFocused) {
+                autocomplete.isFocused = true
+                autocomplete.$emit("focus")
+                autocomplete.$refs.input.focus()
+            }
         },
         closeMenuCondicional(e) {
             if (!this.isAttached) return
 
-            // console.log('closeMenuCondicional', e);
             // let autocomplete = this.$refs.autocomplete
 
             // if (e && e.path[0]) {
@@ -210,6 +206,3 @@ export default {
     }
 }
 </script>
-
-<style>
-</style>
