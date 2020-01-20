@@ -28,10 +28,10 @@
 
 <script>
 import _ from "lodash"
-import { format, unformat, setCursor, defaults } from "../../util/moneyMask.js"
+import { format, unformat, setCursor, defaults } from "./../util/moneyMask.js"
 
 export default {
-    name: "BaseMoneyField2",
+    name: "MoneyField",
     props: {
         // must be included in props
         value: {

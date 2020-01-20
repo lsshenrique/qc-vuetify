@@ -44,7 +44,7 @@
 import moment from "moment"
 
 export default {
-    name: "BaseDataPicker",
+    name: "DataPicker",
     props: {
         label: String,
         value: String,

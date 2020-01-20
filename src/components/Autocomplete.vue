@@ -44,6 +44,7 @@
 import _ from "lodash"
 
 export default {
+    name: "Autocomplete",
     props: {
         value: {
             type: null,

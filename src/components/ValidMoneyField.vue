@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import BaseMoneyField from "./../base/BaseMoneyField"
+import BaseMoneyField from "./MoneyField"
 import { ValidationProvider } from "vee-validate"
 
 export default {

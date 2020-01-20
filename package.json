@@ -13,23 +13,27 @@
         "vuetify"
     ],
     "license": "Apache-2.0",
-    "main": "src/index.js",
+    "main": "dist/qc-vuetify.umd.js",
+    "module": "dist/qc-vuetify.esm.js",
+    "unpkg": "dist/qc-vuetify.min.js",
+    "browser": {
+        "./sfc": "src/qc-vuetify.vue"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lsshenrique/qc-vuetify.git"
     },
     "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "build-bundle": "vue-cli-service build --target lib --name qc-vuetify ./src/index.js",
-        "lint": "vue-cli-service lint"
+        "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+        "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/qc-vuetify.umd.js",
+        "build:es": "rollup --config build/rollup.config.js --format es --file dist/qc-vuetify.esm.js",
+        "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/qc-vuetify.min.js"
     },
     "dependencies": {
         "core-js": "^2.6.5",
         "lodash": "^4.17.15",
         "moment": "^2.24.0",
         "vee-validate": "^2.2.10",
-        "vue": "^2.6.10",
         "vuetify": "^1.5.14"
     },
     "devDependencies": {
@@ -39,6 +43,12 @@
         "babel-eslint": "^10.0.1",
         "eslint": "^5.16.0",
         "eslint-plugin-vue": "^5.0.0",
+        "rollup": "^1.17.0",
+        "rollup-plugin-buble": "^0.19.8",
+        "rollup-plugin-commonjs": "^10.0.1",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-vue": "^5.0.1",
+        "vue": "^2.6.10",
         "vue-template-compiler": "^2.6.10"
     },
     "eslintConfig": {

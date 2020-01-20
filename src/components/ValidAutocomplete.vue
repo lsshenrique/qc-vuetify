@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import BaseAutocomplete from "./../base/Autocomplete"
+import BaseAutocomplete from "./Autocomplete"
 import { ValidationProvider } from "vee-validate"
 
 export default {

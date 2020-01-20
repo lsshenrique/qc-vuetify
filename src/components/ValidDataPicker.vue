@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import BaseDataPicker from "./../base/DataPicker"
+import BaseDataPicker from "./DataPicker"
 import { ValidationProvider } from "vee-validate"
 
 export default {

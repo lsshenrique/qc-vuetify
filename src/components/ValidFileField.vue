@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import BaseFileField from "./../base/FileField"
+import BaseFileField from "./FileField"
 import { ValidationProvider } from "vee-validate"
 
 export default {
