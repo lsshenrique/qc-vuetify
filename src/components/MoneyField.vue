@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import _ from "lodash"
+import debounce from "lodash/debounce"
 import { format, unformat, setCursor, defaults } from "./../util/moneyMask.js"
 
 export default {
@@ -89,7 +89,7 @@ export default {
 
             return el.tagName.toLocaleUpperCase() !== "INPUT" ? el.getElementsByTagName("input")[0] : el
         },
-        emitInputLazy: _.debounce(function(value) {
+        emitInputLazy: debounce(function(value) {
             this.innerValue = value
             // this.$emit("input", value)
             this.$emit("input", this.masked ? value : unformat(value, this.precision))

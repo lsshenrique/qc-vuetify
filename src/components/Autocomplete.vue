@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import _ from "lodash"
+import uniq from "lodash/uniq"
 
 export default {
     name: "Autocomplete",
@@ -123,7 +123,7 @@ export default {
                 .map(x => x[this.itemValue])
                 .filter(x => x !== -1)
 
-            this.innerValue = _.uniq(_items)
+            this.innerValue = uniq(_items)
             this.search = null
             this.hasFocus = false
         },
@@ -155,12 +155,12 @@ export default {
             this.$emit("update", e)
         },
         openMenuCondicional(e) {
-            if (!this.isAttached || !e) return
-
             if (this.isReadonly) {
                 this.forceCloseMenu()
                 return
             }
+
+            if (!this.isAttached || !e) return
 
             let autocomplete = this.$refs.autocomplete
 
@@ -176,20 +176,6 @@ export default {
         },
         closeMenuCondicional(e) {
             if (!this.isAttached) return
-
-            // let autocomplete = this.$refs.autocomplete
-
-            // if (e && e.path[0]) {
-            //     let firstEl = e.path[0]
-
-            //     if (firstEl.tagName !== "INPUT" || e.type !== "blur") {
-            //         if (autocomplete.content.contains(firstEl) || autocomplete.$el.contains(firstEl)) {
-            //             this.openMenuCondicional(e)
-            //             return
-            //         }
-            //     }
-            // }
-
             this.forceCloseMenu()
         },
         forceCloseMenu() {

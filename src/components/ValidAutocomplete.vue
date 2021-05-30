@@ -54,6 +54,7 @@ export default {
         // Handles external model changes.
         value: {
             deep: true,
+            immediate: true,
             handler(newVal) {
                 this.innerValue = newVal
             }

@@ -30,11 +30,10 @@
         "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/qc-vuetify.min.js"
     },
     "dependencies": {
-        "core-js": "^2.6.5",
-        "lodash": "^4.17.15",
-        "moment": "^2.24.0",
-        "vee-validate": "^2.2.10",
-        "vuetify": "^1.5.14"
+        "lodash": "^4.17.20",
+        "moment": "^2.27.0",
+        "vee-validate": "^2.2.15",
+        "vuetify": "^1.5.24"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.11.0",
@@ -42,14 +41,14 @@
         "@vue/cli-service": "^3.11.0",
         "babel-eslint": "^10.0.1",
         "eslint": "^5.16.0",
-        "eslint-plugin-vue": "^5.0.0",
+        "eslint-plugin-vue": "^5.2.3",
         "rollup": "^1.17.0",
         "rollup-plugin-buble": "^0.19.8",
         "rollup-plugin-commonjs": "^10.0.1",
         "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-vue": "^5.0.1",
-        "vue": "^2.6.10",
-        "vue-template-compiler": "^2.6.10"
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12"
     },
     "eslintConfig": {
         "root": true,
